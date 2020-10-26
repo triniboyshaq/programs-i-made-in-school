@@ -1,0 +1,48 @@
+import location
+from time import sleep
+
+start = location.start_updates()
+stop = location.stop_updates()
+get_lc = location.get_location()
+
+
+def decode_lc(loc):
+	addr = location.geocode(loc)
+	return addr
+	
+
+def rev_decode_lc(loc):
+	addr = location.reverse_geocode(loc)
+	return addr
+
+def finder(loc):
+	s = loc.get('Street')
+	st = loc.get('State')
+	c = loc.get('City')
+	z = loc.get('Zip')
+	ct = loc.get('Country')
+	if (s,st,c,z,ct) != None:
+		return str('''Street: {0}
+State: {1}
+City: {2}
+Zip: {3}
+Country: {4}'''.format(s,st,c,z,ct))
+		
+	
+
+def pars_loc(loc):
+	lat = loc.get('latitude')
+	lon = loc.get('longitude')
+	if lat and lon != None:
+		return str('''Latitude: {0}
+Longitude: {1}'''.format(lat,lon))
+	
+	else:
+		print('Cant find information')
+			
+#a = dict(decode_lc('input location as dict variable')[0])
+b = dict(rev_decode_lc(get_lc)[0])
+
+start
+print(finder(b))
+stop
